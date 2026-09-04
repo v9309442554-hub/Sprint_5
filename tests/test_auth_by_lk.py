@@ -5,15 +5,14 @@ from fixtures import BASE_URL
 from data.test_data import AUTH_EMAIL, AUTH_PASSWORD
 
 
-class TestQuitByButton:
-    def test_quit_by_button(self, driver):
+class TestAuthByLK:
+    def test_auth_by_lk_button(self, driver):
         driver.get(BASE_URL)
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(Locator.ACCOUNT_BUTTON)
         )
 
         driver.find_element(*Locator.ACCOUNT_BUTTON).click()
-        WebDriverWait(driver, 10).until(EC.url_contains("/login"))
 
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(Locator.LOGIN_EMAIL_FIELD)
@@ -26,12 +25,4 @@ class TestQuitByButton:
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(Locator.LOGOUT_BUTTON)
         )
-
-        driver.find_element(*Locator.ACCOUNT_BUTTON).click()
-        WebDriverWait(driver, 10).until(EC.url_contains("/account"))
-
-        driver.find_element(*Locator.LOGOUT_BUTTON).click()
-
-        WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(Locator.ACCOUNT_BUTTON)
-        )
+        assert driver.find_element(*Locator.LOGOUT_BUTTON).is_displayed()

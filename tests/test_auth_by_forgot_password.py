@@ -1,46 +1,28 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
-from tests.locators import Locator
+from locators import Locator
+from fixtures import BASE_URL
+from data.test_data import AUTH_EMAIL, AUTH_PASSWORD
 
 
-def test_auth_by_form_forgot_password():
-    email = "v_88@yandex.ru"
-    password = "qwerty"
+class TestAuthByForgotPassword:
+    def test_auth_by_form_forgot_password(self, driver):
+        driver.get(f"{BASE_URL}forgot-password")
+        WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(Locator.NAME_FIELD)
+        )
 
-    service = Service(ChromeDriverManager().install())
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
-    driver = webdriver.Chrome(service=service, options=options)
+        driver.find_element(*Locator.LOGIN_FROM_REGISTER_LINK).click()
 
-    # 1. Переходим на страницу восстановления пароля
-    driver.get("https://stellarburgers.education-services.ru/forgot-password")
-    WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(Locator.NAME_FIELD)
-    )
+        WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(Locator.LOGIN_EMAIL_FIELD)
+        )
+        driver.find_element(*Locator.LOGIN_EMAIL_FIELD).send_keys(AUTH_EMAIL)
+        driver.find_element(*Locator.LOGIN_PASSWORD_FIELD).send_keys(AUTH_PASSWORD)
 
-    # 2. Нажимаем ссылку «Войти» на странице восстановления пароля
-    driver.find_element(*Locator.LOGIN_FROM_REGISTER_LINK).click()
+        driver.find_element(*Locator.LOGIN_SUBMIT_BUTTON).click()
 
-    # 3. Заполняем форму входа
-    WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(Locator.LOGIN_EMAIL_FIELD)
-    )
-    driver.find_element(*Locator.LOGIN_EMAIL_FIELD).send_keys(email)
-    driver.find_element(*Locator.LOGIN_PASSWORD_FIELD).send_keys(password)
-
-    # 4. Нажимаем «Войти»
-    driver.find_element(*Locator.LOGIN_SUBMIT_BUTTON).click()
-
-    # 5. Проверяем авторизацию — появление кнопки «Выход»
-    WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(Locator.LOGOUT_BUTTON)
-    )
-    assert driver.find_element(*Locator.LOGOUT_BUTTON).is_displayed(), \
-        "Кнопка «Выход» не отображается — авторизация не прошла"
-    print("Аутентификация успешна, URL:", driver.current_url)
-
-    driver.quit()
+        WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(Locator.LOGOUT_BUTTON)
+        )
+        assert driver.find_element(*Locator.LOGOUT_BUTTON).is_displayed()
