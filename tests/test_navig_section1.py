@@ -2,7 +2,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from locators import Locator
-from fixtures import BASE_URL
+from conftest import BASE_URL
 
 
 class TestNavigSections:

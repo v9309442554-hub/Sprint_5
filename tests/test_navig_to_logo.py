@@ -1,7 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from locators import Locator
-from fixtures import BASE_URL
+from conftest import BASE_URL
 
 
 class TestNavigationToLogo:
