@@ -14,9 +14,10 @@ class TestNavigSections:
 
         driver.find_element(*Locator.SAUCE_TAB).click()
         WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(Locator.SPICY_X_SAUCE)
+            EC.presence_of_element_located(Locator.ACTIVE_TAB)
         )
-        assert driver.find_element(*Locator.SAUCE_TAB).is_displayed()
+        assert driver.find_element(*Locator.SAUCE_TAB).get_attribute("class") == \
+            driver.find_element(*Locator.ACTIVE_TAB).get_attribute("class")
 
     def test_navig_fillings(self, driver):
         driver.get(BASE_URL)
@@ -26,9 +27,10 @@ class TestNavigSections:
 
         driver.find_element(*Locator.FILLINGS_TAB).click()
         WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(Locator.PROTOSTOMIA_MEAT)
+            EC.presence_of_element_located(Locator.ACTIVE_TAB)
         )
-        assert driver.find_element(*Locator.FILLINGS_TAB).is_displayed()
+        assert driver.find_element(*Locator.FILLINGS_TAB).get_attribute("class") == \
+            driver.find_element(*Locator.ACTIVE_TAB).get_attribute("class")
 
     def test_navig_sauces_to_buns(self, driver):
         driver.get(BASE_URL)
@@ -38,12 +40,14 @@ class TestNavigSections:
 
         driver.find_element(*Locator.SAUCE_TAB).click()
         WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(Locator.SPICY_X_SAUCE)
+            EC.presence_of_element_located(Locator.ACTIVE_TAB)
         )
-        assert driver.find_element(*Locator.SAUCE_TAB).is_displayed()
+        assert driver.find_element(*Locator.SAUCE_TAB).get_attribute("class") == \
+            driver.find_element(*Locator.ACTIVE_TAB).get_attribute("class")
 
         driver.find_element(*Locator.BUNS_TAB).click()
         WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(Locator.R2D3_BUN)
+            EC.presence_of_element_located(Locator.ACTIVE_TAB)
         )
-        assert driver.find_element(*Locator.BUNS_TAB).is_displayed()
+        assert driver.find_element(*Locator.BUNS_TAB).get_attribute("class") == \
+            driver.find_element(*Locator.ACTIVE_TAB).get_attribute("class")

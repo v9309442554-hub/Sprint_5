@@ -23,6 +23,6 @@ class TestAuthByLK:
         driver.find_element(*Locator.LOGIN_SUBMIT_BUTTON).click()
 
         WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(Locator.LOGOUT_BUTTON)
+            EC.visibility_of_element_located(Locator.ORDER_BUTTON)
         )
-        assert driver.find_element(*Locator.LOGOUT_BUTTON).is_displayed()
+        assert driver.find_element(*Locator.ORDER_BUTTON).is_displayed()

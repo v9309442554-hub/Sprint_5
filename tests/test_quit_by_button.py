@@ -9,11 +9,10 @@ class TestQuitByButton:
     def test_quit_by_button(self, driver):
         driver.get(BASE_URL)
         WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(Locator.ACCOUNT_BUTTON)
+            EC.visibility_of_element_located(Locator.ACCOUNT_LINK)
         )
 
-        driver.find_element(*Locator.ACCOUNT_BUTTON).click()
-        WebDriverWait(driver, 10).until(EC.url_contains("/login"))
+        driver.find_element(*Locator.ACCOUNT_LINK).click()
 
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(Locator.LOGIN_EMAIL_FIELD)
@@ -24,14 +23,19 @@ class TestQuitByButton:
         driver.find_element(*Locator.LOGIN_SUBMIT_BUTTON).click()
 
         WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(Locator.LOGOUT_BUTTON)
+            EC.visibility_of_element_located(Locator.ORDER_BUTTON)
         )
+        assert driver.find_element(*Locator.ORDER_BUTTON).is_displayed()
 
-        driver.find_element(*Locator.ACCOUNT_BUTTON).click()
+        driver.find_element(*Locator.ACCOUNT_LINK).click()
         WebDriverWait(driver, 10).until(EC.url_contains("/account"))
 
+        WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(Locator.LOGOUT_BUTTON)
+        )
         driver.find_element(*Locator.LOGOUT_BUTTON).click()
 
         WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(Locator.ACCOUNT_BUTTON)
+            EC.visibility_of_element_located(Locator.LOGIN_BUTTON)
         )
+        assert driver.find_element(*Locator.LOGIN_BUTTON).is_displayed()

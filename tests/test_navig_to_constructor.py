@@ -19,3 +19,4 @@ class TestNavigationToConstructor:
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(Locator.CONSTRUCTOR_SECTION)
         )
+        assert driver.find_element(*Locator.CONSTRUCTOR_SECTION).is_displayed()
