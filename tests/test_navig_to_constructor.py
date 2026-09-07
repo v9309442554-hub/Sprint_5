@@ -20,3 +20,4 @@ class TestNavigationToConstructor:
             EC.visibility_of_element_located(Locator.CONSTRUCTOR_SECTION)
         )
         assert driver.find_element(*Locator.CONSTRUCTOR_SECTION).is_displayed()
+        assert "/constructor" in driver.current_url

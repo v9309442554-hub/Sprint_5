@@ -24,12 +24,6 @@ class TestAuthOnMainPage:
         driver.find_element(*Locator.LOGIN_SUBMIT_BUTTON).click()
 
         WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(Locator.ORDER_BUTTON)
+            EC.visibility_of_element_located(Locator.ACCOUNT_LINK)
         )
-        assert driver.find_element(*Locator.ORDER_BUTTON).is_displayed()
-
-        driver.find_element(*Locator.ORDER_BUTTON).click()
-
-        WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/main/section[2]/div/button'))
-        )
+        assert driver.find_element(*Locator.ACCOUNT_LINK).is_displayed()

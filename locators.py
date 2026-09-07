@@ -38,7 +38,7 @@ class Locator:
     # Локатор для кнопки "Войти" в окне входа
     LOGIN_SUBMIT_BUTTON = (
         By.XPATH,
-        "//*[@id='root']/div/main/div/form/button",
+        "//button[contains(@class, 'button_button__33qZ0') and contains(., 'Войти')]",
     )
 
     # Локатор для сообщения об ошибке "Пользователь уже существует"
@@ -62,7 +62,7 @@ class Locator:
     # Локатор для кнопки "Войти в аккаунт"
     LOGIN_ACCOUNT_BUTTON = (
         By.XPATH,
-        "//*[@id='root']/div/main/section[2]/div/button",
+        "//button[contains(@class, 'button_button__33qZ0') and contains(., 'Войти в аккаунт')]",
     )
 
     # Локатор для ссылки "Войти"
@@ -95,7 +95,7 @@ class Locator:
     # Локатор для кнопки "Оформить заказ" (появляется после авторизации)
     ORDER_BUTTON = (
         By.XPATH,
-        "//*[@id='root']/div/main/section[2]/div/button",
+        "//button[contains(@class, 'button_button__33qZ0') and contains(., 'Оформить заказ')]",
     )
 
     # Локатор для кнопки "Выход"
